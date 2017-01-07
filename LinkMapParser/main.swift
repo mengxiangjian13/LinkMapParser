@@ -9,26 +9,28 @@
 import Foundation
 
 var filePath : String?
+var isLibstat = false
 
 var i = 0
 for argument in CommandLine.arguments {
     if i == 1 {
         filePath = argument
+    } else if i == 2 {
+        if argument.contains("l") {
+            isLibstat = true
+        }
     }
     i += 1
 }
 
-func parseStart(_ filePath : String) {
-    print("file path is : \(filePath)")
-}
-
 if let filePath = filePath {
     if FileManager.default.fileExists(atPath: filePath) {
-        parseStart(filePath)
+        let parser = Parser();
+        parser.parseStart(filePath: filePath,isLibstat: isLibstat)
     } else {
         print("file is not exist")
     }
 } else {
-    print("usage : LinkMapParser filepath")
+    print("usage : LinkMapParser filepath \n -l: libStat")
 }
 
