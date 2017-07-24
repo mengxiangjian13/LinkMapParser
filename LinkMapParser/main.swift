@@ -11,8 +11,7 @@ import Foundation
 var filePath : String?
 var isLibstat = false
 
-var i = 0
-for argument in CommandLine.arguments {
+for (i, argument) in CommandLine.arguments.enumerated() {
     if i == 1 {
         filePath = argument
     } else if i == 2 {
@@ -20,7 +19,6 @@ for argument in CommandLine.arguments {
             isLibstat = true
         }
     }
-    i += 1
 }
 
 if let filePath = filePath {
